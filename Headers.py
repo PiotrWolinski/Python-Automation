@@ -6,5 +6,10 @@ class Headers:
 
         self._records = []
 
-    def add_record(self, record):
-        pass
+    @property
+    def records(self):
+        return self._records
+
+    def add_record(self, record=None):
+        if record is not None:
+            self.records.append(record)

@@ -10,3 +10,11 @@ class Record:
     @staticmethod
     def get_score(record):
         return record.score
+
+    def __str__(self):
+        text = f"Title: {self.title} Score: {self.score} "
+        return text
+
+    def __repr__(self):
+        repr_text = f"<Title: {self.title} Score: {self.score} >"
+        return repr_text
