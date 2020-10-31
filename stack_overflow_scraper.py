@@ -3,8 +3,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 
-
 from time import sleep
+
+def send_keys_slowly(text, element):
+    for char in text:
+        element.send_keys(char)
+        sleep(0.2)
 
 driver = webdriver.Chrome()
 driver.maximize_window()
@@ -13,7 +17,7 @@ driver.get('https://stackoverflow.com/')
 tag_to_search = 'python'
 
 search_box = driver.find_element_by_xpath('//*[@id="search"]/div/input')
-search_box.send_keys(tag_to_search)
+send_keys_slowly(tag_to_search, search_box)
 search_box.send_keys(webdriver.common.keys.Keys.ENTER)
 
 total_answers = 0
@@ -24,6 +28,7 @@ while True:
 
         answers = driver.find_elements_by_class_name('question-summary')
         total_answers += len(answers)
+        
         print(f'Current page: {current_page}')
         print(f'Answers gathered: {total_answers}')
 
